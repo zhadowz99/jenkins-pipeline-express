@@ -28,6 +28,11 @@ node('jenkins-agent') {
         withSonarQubeEnv('SonarQube Server') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
+
+       stage('Deleting Workspace Post Build') {
+       //Deleting Workspace
+       deleteDir()
+       }
     }
     
   }
