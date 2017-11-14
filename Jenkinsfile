@@ -25,7 +25,7 @@ node('jenkins-agent') {
         stage('SonarQube analysis') {
         // requires SonarQube Scanner 3
         def scannerHome = tool 'SonarQube Scanner 3';
-        withSonarQubeEnv('My SonarQube Server') {
+        withSonarQubeEnv('SonarQube Server') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
     }
