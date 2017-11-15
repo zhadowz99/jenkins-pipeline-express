@@ -1,6 +1,11 @@
 node('jenkins-agent') {
   
   try{
+
+       stage('Cleaning Workspace') {
+       echo 'Initializing for clean build...'
+       deleteDir()
+       }
     
     stage('Initialize') {
         echo 'Initializing...'
@@ -8,17 +13,23 @@ node('jenkins-agent') {
         env.PATH = "${node}/bin:${env.PATH}"
     }
 
-    stage 'checkout project'
-    checkout scm
+    stage('Checkout SCM') {
+        echo 'Checkout SCM...'
+        checkout scm
+    }
+    
+    stage('check env') {
+        echo 'Checking Environment...'
+        sh 'node -v'
+        sh 'npm install'
+    }
 
-    stage 'check env'
-
-         sh 'node -v'
-         sh 'npm install'
 
     try{
-        stage 'test'
-        sh 'npm test'
+        stage('Testing') {
+            echo 'Testing...'
+            sh 'npm test'
+        }
 
     }finally{
         
@@ -28,11 +39,6 @@ node('jenkins-agent') {
         withSonarQubeEnv('SonarQube Server') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
-
-       stage('Deleting Workspace Post Build') {
-       //Deleting Workspace
-       deleteDir()
-       }
     }
     
   }
