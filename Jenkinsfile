@@ -9,7 +9,7 @@ node('jenkins-agent') {
     
     stage('Initialize') {
         echo 'Initializing...'
-        def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        def node = tool name: 'NodeJS-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
     }
 
@@ -34,8 +34,8 @@ node('jenkins-agent') {
     }finally{
         
         stage('SonarQube analysis') {
-        // requires SonarQube Scanner 3
-        def scannerHome = tool 'SonarQube Scanner 3';
+        
+        def scannerHome = tool 'SonarQube Scanner';
         withSonarQubeEnv('SonarQube Server') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
