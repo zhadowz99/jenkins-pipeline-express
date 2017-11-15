@@ -9,7 +9,7 @@ node('jenkins-agent-nodejs-1') {
     
     stage('Initialize') {
         echo 'Initializing...'
-        def node = tool name: 'NodeJS-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        def node = tool name: 'NodeJS-7.4', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
         env.PATH = "${node}/bin:${env.PATH}"
     }
 
