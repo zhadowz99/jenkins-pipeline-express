@@ -1,4 +1,4 @@
-node('jenkins-agent') {
+node('jenkins-agent-nodejs-1') {
   
   try{
 
