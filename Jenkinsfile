@@ -21,14 +21,14 @@ node('jenkins-agent-nodejs-1') {
     stage('check env') {
         echo 'Checking Environment...'
         sh 'node -v'
-        sh 'npm install'
+        sh 'npm -v'
     }
 
 
     try{
-        stage('Testing') {
-            echo 'Testing...'
-            sh 'npm test'
+        stage('Building') {
+            echo 'Building...'
+            sh 'npm install'
         }
 
     }finally{
